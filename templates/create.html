@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Tasks App</title>
+    <!-- BOOTSTRAP 4 -->
+    <link rel="stylesheet" href="https://bootswatch.com/5/cerulean/bootstrap.css">
+
+    <!-- FONTS -->
+    <link href="https://fonts.googleapis.com/css?family=Lobster&display=swap" rel="stylesheet">
+</head>
+
+<body>
+<main class="container p-4">
+    <div class="container">
+        <div class="page-header" id="banner">
+            <div class="row">
+                <div class="col-lg-8 col-md-7 col-sm-6">
+                    <h1>UVT's Form</h1>
+                    <p class="lead">Control to data</p>
+                </div>
+                <div class="col-lg-4 col-md-5 col-sm-6">
+                    <div class="sponsor">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="bs-component">
+                    <form action="/create" method="POST">
+                        <div class="form-group row">
+                            <label for="value" class="col-sm-2 col-form-label">Value:</label>
+                            <div class="col-sm-10">
+                                <input type="number" class="form-control" name="value" id="value" value="0">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="date_from" class="col-sm-2 col-form-label">From:</label>
+                            <div class="col-sm-10">
+                                <input type="date" class="form-control" name="date_from" id="date_from" value="0">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="date_to" class="col-sm-2 col-form-label">To:</label>
+                            <div class="col-sm-10">
+                                <input type="date" class="form-control" name="date_to" id="date_to" value="0">
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="bs-component">
+                    <ul class="list-group">
+                        {% for uv in uvt %}
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            From: {{uv.date_from }} to: {{ uv.date_to }}
+                            <span class="badge bg-primary badge-pill">{{uv.value}}</span>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="bs-component">
+                    <form action="/filter" method="POST">
+                        <div class="form-group row">
+                            <label for="filter_date_from" class="col-sm-2 col-form-label">Date from:</label>
+                            <div class="col-sm-10">
+                                <input type="date" class="form-control" name="filter_date_from" id="filter_date_from">
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-outline-warning">Filter</button>
+                        <a href="{{url_for('home')}}" class="btn btn-outline-primary">Reset</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+</main>
+</body>
+</html>
